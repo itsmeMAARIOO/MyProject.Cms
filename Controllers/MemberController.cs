@@ -11,7 +11,8 @@ public class MemberController(LibraryMemberServices memberServices) : UmbracoApi
 {
     [HttpPost]
     [Route("members")]
-    public IActionResult RegisterMember(NewMemberRequest newMember) 
+    // rmb for the [FromForm] as it is the proper way to get the data from the user
+    public IActionResult RegisterMember([FromForm]NewMemberRequest newMember) 
     {
         var newLibraryMember = memberServices.Register(newMember);
         return Ok(newLibraryMember);

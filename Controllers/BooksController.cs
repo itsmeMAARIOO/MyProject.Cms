@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.IdentityModel.Tokens;
 using MyProject.Cms.Models;
 using MyProject.Cms.Services;
@@ -33,18 +32,16 @@ public class BooksController(BookServices bookServices, UmbracoHelper umbracoHel
 
     [HttpPost]
     [Route("books")]
-    public IActionResult AddNewBook(NewBookRequest newBook, [FromQuery]string? culture)
+    public IActionResult AddNewBook([FromForm]NewBookRequest newBook, [FromQuery]string? culture)
     {
         culture = culture ?? "en-US";
         var addedNewBook = bookServices.AddBook(newBook!, culture);
         return Ok(addedNewBook);
     }
 
-
-    // image is added a new one instead of replacing the old image
     [HttpPut]
     [Route("{id}")]
-    public IActionResult UpdateBook(string id, NewBookRequest updateBook, [FromQuery] string? culture)
+    public IActionResult UpdateBook(string id, [FromForm]NewBookRequest updateBook, [FromQuery] string? culture)
     {
         culture = culture ?? "en-US";
         var editedBook = bookServices.Update(id, updateBook, culture);

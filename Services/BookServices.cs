@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using MyProject.Cms.Models;
 using Umbraco.Cms.Core;
@@ -9,7 +8,6 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Strings;
-using Umbraco.Cms.Infrastructure.Migrations.Expressions.Update;
 using Umbraco.Cms.Web.Common;
 
 namespace MyProject.Cms.Services;
@@ -64,9 +62,9 @@ public class BookServices(IVariationContextAccessor _variationContextAccessor ,U
         {   
             // thanks Abdullah
             // Initialize a new image at the root of the media archive
-            IMedia media = mediaService.CreateMedia("cover", Constants.System.Root, Constants.Conventions.MediaTypes.Image);
+            IMedia media = mediaService.CreateMedia(file.FileName, Constants.System.Root, Constants.Conventions.MediaTypes.Image);
             // Set the property value (Umbraco will handle the underlying magic)
-            media.SetValue(_mediaFileManager, _mediaUrlGeneratorCollection, _shortStringHelper, _contentTypeBaseServiceProvider, Constants.Conventions.Media.File, "cover.jpg", stream);
+            media.SetValue(_mediaFileManager, _mediaUrlGeneratorCollection, _shortStringHelper, _contentTypeBaseServiceProvider, Constants.Conventions.Media.File, file.FileName, stream);
             // get the key and pass it to be guid
             bookCoverGuid = media.Key;
 

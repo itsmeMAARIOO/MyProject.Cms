@@ -1,0 +1,37 @@
+﻿@using Umbraco.Cms.Web.Common
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+
+@{
+    var model = (IPublishedContent)Model;
+    var bookCulture = model.Value("bookSection");
+    var titleCulture = model.Value("title");
+    var nameCulture = model.Value("nameSection");
+    var authorCulture = model.Value("authorSection");
+    var totalCulture = model.Value("totalSection");
+    var availableCulture = model.Value("AvailableSection");
+    var coverCulture = model.Value("coverSection");
+    var booksListing = Umbraco.Content("e86c24fb-2ca5-4d03-9e3f-ee2f132b7d73")!;
+    var books = booksListing.Children.ToList();
+}
+
+<h1>@titleCulture</h1>
+
+<div>
+    @{
+        int num = 1;
+        foreach (var book in books)
+        {
+            var cover = book.Value<MediaWithCrops>("bookCover")?.Url();
+            <h3>@bookCulture @num :</h3>
+            <p>@nameCulture: @book.Value("bookName") </p>
+            <p>@authorCulture: @book.Value("bookAuthor")</p>
+            <p>@totalCulture: @book.Value("totalQuantity")</p>
+            <p>@availableCulture: @book.Value("availableQuantity")</p>
+            <p>@coverCulture: <br><img src="@cover" style="width: 300px; height: 200px;" /></p>
+            num++;
+        }
+    }
+</div>
