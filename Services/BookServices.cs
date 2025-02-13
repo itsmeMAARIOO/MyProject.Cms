@@ -34,8 +34,8 @@ public class BookServices(IVariationContextAccessor _variationContextAccessor ,U
         var matchedBook = booksListing?.Children
             .Where(x =>
             x.Key == idToSearch ||
-            x.Name.Contains(bookToSearch) ||
-            x.GetProperty("bookAuthor")?.ToString() == bookToSearch)
+            x.Name.ToLower().Contains(bookToSearch.ToLower()) ||
+            x.Value("bookAuthor")?.ToString()?.ToLower() == bookToSearch.ToLower())
             .Select(x => new Book(x)
             {
                 Id = x.Key,
