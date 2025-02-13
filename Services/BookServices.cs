@@ -151,12 +151,12 @@ public class BookServices(IVariationContextAccessor _variationContextAccessor ,U
         return foundDeleteBook;    
     }
 
-    public class MediaResult {
+    //public class MediaResult {
 
-        [JsonPropertyName("key")]
-        public string Key { get; set; } = "";
+    //    [JsonPropertyName("key")]
+    //    public string Key { get; set; } = "";
 
-        [JsonPropertyName("mediaKey")]
-        public string MediaKey { get; set; } = "";
-    }
+    //    [JsonPropertyName("mediaKey")]
+    //    public string MediaKey { get; set; } = "";
+    //}
 }
